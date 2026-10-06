@@ -1,0 +1,8 @@
+# Dependencias (se regeneran con `npm install`)
+node_modules/
+
+# Salida de produccion (se regenera con `npm run build`)
+dist/
+
+# Logs
+*.log

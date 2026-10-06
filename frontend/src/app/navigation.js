@@ -1,0 +1,20 @@
+// Fuente unica de navegacion: el menu lateral y el router se generan desde aqui.
+export const NAV_ITEMS = [
+    { to: '/', label: 'Dashboard' },
+    { to: '/empresas', label: 'Empresas' },
+    { to: '/sucursales', label: 'Sucursales' },
+    { to: '/usuarios', label: 'Usuarios' },
+    { to: '/clientes', label: 'Clientes' },
+    { to: '/prospectos', label: 'Prospectos' },
+    { to: '/cuentas', label: 'Cuentas' },
+    { to: '/creditos', label: 'Créditos' },
+    { to: '/desembolsos', label: 'Desembolsos' },
+    { to: '/cajas', label: 'Cajas' },
+    { to: '/movimientos', label: 'Movimientos' },
+    { to: '/cobranzas', label: 'Cobranzas' },
+    { to: '/ruta-cobros', label: 'Ruta de cobros' },
+    { to: '/solicitudes', label: 'Solicitudes web' },
+    { to: '/notificaciones', label: 'Avisos' },
+    { to: '/reportes', label: 'Reportes' },
+    { to: '/auditoria', label: 'Auditoría' },
+];

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Widgets</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox-content">
+                    <h2>TODO List</h2>
+                    <small>This is example of task list</small>
+
+                            <input type="checkbox" value="" name="" class="i-checks"/>
+                            <span class="m-l-xs">Buy a milk</span>
+                            <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
+                            <ul class="todo-list m-t">
+                                <li>
+                            <input type="checkbox" value="" name="" class="i-checks" checked/>
+                            <span class="m-l-xs">Go to shop and find some products.</span>
+                            <small class="label label-info"><i class="fa fa-clock-o"></i> 3 mins</small>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="" name="" class="i-checks" />
+                            <span class="m-l-xs">Send documents to Mike</span>
+                            <small class="label label-warning"><i class="fa fa-clock-o"></i> 2 mins</small>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="" name="" class="i-checks"/>
+                            <span class="m-l-xs">Go to the doctor dr Smith</span>
+                            <small class="label label-danger"><i class="fa fa-clock-o"></i> 42 mins</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <h2>TODO Small version</h2>
+                        <small>This is example of small version of todo list</small>
+                        <ul class="todo-list m-t small-list">
+                            <li>
+                                <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                                <span class="m-l-xs todo-completed">Buy a milk</span>
+
+                            </li>
+                            <li>
+                                <a href="#" class="check-link"><i class="fa fa-check-square"></i> </a>
+                                <span class="m-l-xs  todo-completed">Go to shop and find some products.</span>
+
+                            </li>
+                            <li>
+                                <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                                <span class="m-l-xs">Send documents to Mike</span>
+                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
+                            </li>
+                            <li>
+                                <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                                <span class="m-l-xs">Go to the doctor dr Smith</span>
+                            </li>
+                            <li>
+                                <a href="#" class="check-link"><i class="fa fa-square-o"></i> </a>
+                                <span class="m-l-xs">Plan vacation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+  
+
+
+    <!-- iCheck -->
+    <script src="../js/plugins/iCheck/icheck.min.js"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+//orden de los archivos
+
+   <link href="tru/s/select2.css" rel="stylesheet" />
+    <link href="tru/s/bootstrap-material-datetimepicker.css" rel="stylesheet" />   
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+    <script src="tru/s/bootstrap-material-datetimepicker.js"></script>
+    <link href="tru/s/bootstrap-dialog.min.css" rel="stylesheet" />
+    <script src="tru/s/jquery.min.js"></script>
+    <script src="tru/s/bootstrap.min.js"></script>
+    <script src="tru/s/bootstrap-dialog.min.js"></script>
+
+///en la seccion scrip
+
+ <script src="tru/s/select2.min.js"></script>
+    <script src="tru/s/moment.js"></script>
+    <script src="tru/s/bootstrap-material-datetimepicker.js"></script>
+
+---------------------------------
+
+
+
+<asp:TextBox ID="txtfecha" type="text" class="form-control datepicker" placeholder="dd/mm/aaaa" runat="server"></asp:TextBox>
+
+ <script>
+        $('.datepicker').bootstrapMaterialDatePicker({
+            weekStart: 0,
+            time: false,
+            format: 'DD/MM/YYYY'
+            //format: 'dddd DD MMMM YYYY - HH:mm'
+        });
+    </script>

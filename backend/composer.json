@@ -1,0 +1,17 @@
+{
+    "require": {
+        "spipu/html2pdf": "^5.2",
+        "dompdf/dompdf": "^2.0",
+        "luecano/numero-a-letras": "3.0",
+        "illuminate/database": "^7.30",
+        "picqer/php-barcode-generator": "^2.0",
+        "symfony/validator": "^5.4",
+        "vlucas/phpdotenv": "^5.4",
+        "phpoffice/phpspreadsheet": "^1.25"
+    },
+    "autoload": {
+        "psr-4": {
+            "CrediSoporte\\": "src/"
+        }
+    }
+}

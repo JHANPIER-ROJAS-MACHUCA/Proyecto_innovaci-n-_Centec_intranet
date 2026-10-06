@@ -1,0 +1,21 @@
+# Dependencias (se regeneran con `composer install`)
+/vendor/
+
+# Entorno local (cada servidor tiene el suyo)
+/.env
+
+# Logs y subidas generadas en runtime
+error_log
+/storage/uploads/*
+/storage/customers/*
+/storage/profiles/*
+/storage/attachments/*
+!.gitkeep
+
+# Backups y dumps (viven en /database, no se versionan los .sql grandes)
+*.zip
+well-known.zip
+
+# Frontend
+/frontend/node_modules/
+/frontend/dist/

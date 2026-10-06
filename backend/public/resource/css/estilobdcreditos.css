@@ -1,0 +1,46 @@
+
+
+     form input:required {
+      /*border:1px solid red;*/
+     /*box-shadow: 0 0 5px 1px red;*/
+    /* otras propiedades */
+    }
+    /*Si el valor que el usuario escribe es valido, obtendra un color verde*/
+    form input:valid{
+        box-shadow: 0 0 0.01px 0.01px blue;
+        /* otras propiedades */
+    }
+    /*caso contrario, el color sera rojo*/
+    form input:focus:invalid{
+       /*box-shadow: 0 0 5px 1px red;*/
+        /* otras propiedades */
+    }
+
+       form select:required {
+      /*border:1px solid red;*/
+     /*box-shadow: 0 0 5px 1px red;*/
+    /* otras propiedades */
+    }
+    /*Si el valor que el usuario escribe es valido, obtendra un color verde*/
+    form select:valid{
+        box-shadow: 0 0 0.01px 0.01px blue;
+        /* otras propiedades */
+    }
+    /*caso contrario, el color sera rojo*/
+    form select:focus:invalid{
+       /*box-shadow: 0 0 5px 1px red;*/
+        /* otras propiedades */
+    }
+  form textarea:required {
+      /*border:1px solid red;*/
+     /*box-shadow: 0 0 5px 1px red;*/
+    /* otras propiedades */
+    }
+    /*Si el valor que el usuario escribe es valido, obtendra un color verde*/
+    form textarea:valid{
+        box-shadow: 0 0 0.01px 0.01px blue;
+        /* otras propiedades */
+    }
+    /*caso contrario, el color sera rojo*/
+    form textarea:focus:invalid{
+       /*box-shadow: 0 0 5px 1px red;*/
