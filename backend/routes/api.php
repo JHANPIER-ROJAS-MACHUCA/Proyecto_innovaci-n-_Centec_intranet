@@ -10,7 +10,8 @@ require_once __DIR__ . '/../controllers/CpanelController.php';
 require_once __DIR__ . '/../controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/ReporteController.php';
 require_once __DIR__ . '/../controllers/OperacionController.php';
-require_once __DIR__ . '/../controllers/EvaluacionController.php';
+require_once __DIR__ . '/../Modules/Evaluacion/Controllers/EvaluacionController.php';
+require_once __DIR__ . '/../Modules/Evaluacion/Controllers/DocumentoController.php';
 require_once __DIR__ . '/../controllers/HealthController.php';
 require_once __DIR__ . '/../Modules/Sucursales/Controllers/SucursalController.php';
 require_once __DIR__ . '/../Modules/Rbac/Controllers/RbacController.php';
@@ -20,7 +21,6 @@ require_once __DIR__ . '/../Modules/Clientes/Controllers/ClasificacionController
 require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
-require_once __DIR__ . '/../services/DocumentoService.php';
 
 return function (Router $r) {
     $r->add('GET', '/', HealthController::class, 'index');
@@ -123,18 +123,8 @@ return function (Router $r) {
     $r->add('POST', '/api/extornos/resolver', ExtornoController::class, 'resolver');
     $r->add('GET', '/api/justificaciones', JustificacionController::class, 'listar');
     $r->add('POST', '/api/extornos', ExtornoController::class, 'solicitar');
-    // Módulos traídos de CENTECPC: evaluador + registro clientes + exportación documentos
-    $r->add('GET', '/api/evaluaciones', EvaluacionController::class, 'listar');
-    $r->add('GET', '/api/evaluaciones/ver', EvaluacionController::class, 'ver');
-    $r->add('GET', '/api/evaluaciones/historial', EvaluacionController::class, 'historial');
-    $r->add('POST', '/api/evaluaciones/guardar', EvaluacionController::class, 'guardar');
-    $r->add('POST', '/api/evaluaciones/eliminar', EvaluacionController::class, 'eliminar');
-    $r->add('GET', '/api/evaluaciones/buscar-cliente', EvaluacionController::class, 'buscarCliente');
-    $r->add('GET', '/api/documentos/evaluacion-pdf', DocumentoController::class, 'evaluacionPdf');
-    $r->add('GET', '/api/documentos/evaluacion-patrimonio', DocumentoController::class, 'evaluacionPatrimonio');
-    $r->add('GET', '/api/documentos/evaluacion-word', DocumentoController::class, 'evaluacionWord');
-    $r->add('GET', '/api/documentos/cliente-ficha', DocumentoController::class, 'clienteFicha');
-    $r->add('GET', '/api/documentos/formatos', DocumentoController::class, 'formatos');
+    // Módulo evaluador + documentos — ver backend/Modules/Evaluacion/
+    (require __DIR__ . '/../Modules/Evaluacion/routes.php')($r);
     // Spec 2026: avance/gerencia/caja segura (clientes/cartas viven en su módulo)
     // Módulo sucursales traído de CENTECPC — ver backend/Modules/Sucursales/
     (require __DIR__ . '/../Modules/Sucursales/routes.php')($r);

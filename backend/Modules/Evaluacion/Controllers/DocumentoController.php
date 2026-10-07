@@ -1,50 +1,7 @@
 <?php
-// Exportación de documentos: evaluado (PDF resumen, DJ patrimonial, Word) +
-// registro de cliente (ficha datos, domicilio/negocio).
-// Orígenes:
-// - app/Modules/Evaluacion/Views/ver_pdf.php, ver_patrimonio.php, ver_word.php
-// - evaluador/views/reportes/generar_pdf.php, exportar_resumen_pdf.php,
-//   exportar_resumen_actual_pdf.php, exportar_excel.php, exportar_todo_excel.php,
-//   declaracion_jurada_patrimonial.php
-// - formatos/ (FICHA UNICA DATOS, DOMICILIO Y NEGOCIO 2025, PATRIMONIO, ALOJADO)
-require_once __DIR__ . '/../repositories/EvaluacionRepository.php';
-require_once __DIR__ . '/../Modules/Clientes/Repositories/ClienteRegistroRepository.php';
-
-class DocumentoService
-{
-    public static function evaluacionCompleta($grupo): array
-    {
-        $eval = EvaluacionRepository::getEvaluacion($grupo);
-        if (!$eval) throw new DomainException('Evaluación no encontrada.');
-        $det = EvaluacionRepository::getDetalles($grupo);
-        $eval = array_merge($eval, $det);
-        $eval['conyuge'] = !empty($eval['id_cliente']) ? EvaluacionRepository::getConyugeByCliente((int) $eval['id_cliente']) : null;
-        return $eval;
-    }
-
-    public static function render(string $vista, array $vars): string
-    {
-        extract($vars);
-        ob_start();
-        require __DIR__ . '/../views/evaluacion/' . $vista;
-        return (string) ob_get_clean();
-    }
-
-    public static function fichaCliente(int $idCG): array
-    {
-        return ClienteRegistroRepository::fichaCompleta($idCG);
-    }
-
-    public static function formatosDisponibles(): array
-    {
-        $dir = __DIR__ . '/../storage/formatos/';
-        $out = [];
-        foreach (glob($dir . '*') ?: [] as $f) {
-            $out[] = ['archivo' => basename($f), 'bytes' => filesize($f), 'url' => '/storage/formatos/' . basename($f)];
-        }
-        return $out;
-    }
-}
+// Módulo Evaluacion — controlador de documentos (extraído de
+// Services/DocumentoService.php, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/DocumentoService.php';
 
 class DocumentoController
 {
@@ -88,7 +45,7 @@ class DocumentoController
         }
     }
 
-    // GET /api/documentos/cliente-ficha?idCG={id} → JSON + HTML ficha única de datos
+    // GET /api/documentos/cliente-ficha?idCG={id} → JSON ficha única de datos
     public static function clienteFicha(AppRequest $req): void
     {
         RoleMiddleware::require([8, 5, 7, 2, 9, 1]);
@@ -99,7 +56,7 @@ class DocumentoController
         }
     }
 
-    // GET /api/documentos/formatos → lista de plantillas xlsx/pdf/docx traídas de CENTECPC/formatos
+    // GET /api/documentos/formatos → plantillas xlsx/pdf/docx de CENTECPC/formatos
     public static function formatos(AppRequest $req): void
     {
         RoleMiddleware::require([8, 5, 7, 2, 9, 1]);

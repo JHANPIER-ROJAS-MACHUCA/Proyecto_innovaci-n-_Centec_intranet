@@ -1,8 +1,6 @@
 <?php
-// Puerto de lógica de EvaluacionController CENTECPC (guardar/parseos/WebP/cálculos Excel)
-// Origen: C:\xampp\htdocs\CENTECPC\app\Modules\Evaluacion\controllers\EvaluacionController.php
-// + helpers functions.php (calcularCuotaExcel, capacidad, endeudamiento, capital trabajo, riesgo).
-require_once __DIR__ . '/../repositories/EvaluacionRepository.php';
+// Módulo Evaluacion — servicio (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/EvaluacionRepository.php';
 
 class EvaluacionService
 {

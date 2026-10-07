@@ -1,7 +1,7 @@
 <?php
+// Módulo Evaluacion — controlador (movido de controllers/, phase2-modular).
 // Puerto de EvaluacionController CENTECPC a API REST del backend nuevo.
-// Origen: C:\xampp\htdocs\CENTECPC\app\Modules\Evaluacion\controllers\EvaluacionController.php
-require_once __DIR__ . '/../services/EvaluacionService.php';
+require_once __DIR__ . '/../Services/EvaluacionService.php';
 
 class EvaluacionController
 {
@@ -59,7 +59,9 @@ class EvaluacionController
         $user = RoleMiddleware::require([5, 1]);
         $id = $req->body['grupo'] ?? $req->query['id'] ?? 0;
         if (!$id) Response::error('grupo requerido.', 422);
-        $rol = (int) ($user->idRol ?? 0);
+        // NOTA phase2: AuthMiddleware devuelve array con 'tipoU' (=idRol);
+        // el código legacy leía ->idRol y el borrado definitivo TI era inalcanzable.
+        $rol = (int) ($user['tipoU'] ?? 0);
         if ($rol === 1) {
             EvaluacionRepository::eliminarDefinitivo($id);
         } else {
