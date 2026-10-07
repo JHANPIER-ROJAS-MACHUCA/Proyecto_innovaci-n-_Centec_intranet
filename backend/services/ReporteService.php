@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../repositories/FinancieraRepository.php';
 require_once __DIR__ . '/../repositories/CatalogoRepository.php';
 require_once __DIR__ . '/../Modules/Creditos/Repositories/MoraRepository.php';
+require_once __DIR__ . '/../Modules/Ahorros/Repositories/AhorroRepository.php';
 
 class TransaccionService
 {

@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/../repositories/FinancieraRepository.php';
+// Módulo Ahorros — servicio (movido de services/, phase2-modular; idéntico).
+// Punto de contacto con Caja: registrar() escribe la transacción espejo en
+// tcaja_usu_detal (dirección Ahorros→Caja). Transaction NO se mueve (transversal).
+require_once __DIR__ . '/../Repositories/AhorroRepository.php';
 
 class AhorroService
 {

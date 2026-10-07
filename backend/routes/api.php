@@ -20,6 +20,8 @@ require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CreditoController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CobroController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/MoraController.php';
+require_once __DIR__ . '/../Modules/Creditos/Controllers/MantenimientoController.php';
+require_once __DIR__ . '/../Modules/Ahorros/Controllers/AhorroController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
 
@@ -40,8 +42,8 @@ return function (Router $r) {
     (require __DIR__ . '/../Modules/Clientes/routes.php')($r);
     // Módulo Créditos (cobros incluidos) — ver backend/Modules/Creditos/
     (require __DIR__ . '/../Modules/Creditos/routes.php')($r);
-    $r->add('POST', '/api/ahorros/anular', AhorroController::class, 'anular');
-    $r->add('POST', '/api/ahorros', AhorroController::class, 'registrar');
+    // Módulo Ahorros — ver backend/Modules/Ahorros/
+    (require __DIR__ . '/../Modules/Ahorros/routes.php')($r);
     $r->add('POST', '/api/metas/eliminar', MetaController::class, 'eliminar');
     $r->add('GET', '/api/metas', MetaController::class, 'listar');
     $r->add('POST', '/api/metas/actualizar', MetaController::class, 'actualizar');
@@ -91,7 +93,6 @@ return function (Router $r) {
     $r->add('GET', '/api/reportes/proyecciones', ReporteController::class, 'proyecciones');
     $r->add('GET', '/api/reportes/ahorros-fecha', ReporteController::class, 'ahorrosPorFecha');
     $r->add('GET', '/api/reportes/eliminados', ReporteController::class, 'eliminados');
-    $r->add('GET', '/api/ahorros/detalle', AhorroController::class, 'detalle');
     $r->add('GET', '/api/propuestas/detalle', PropuestaController::class, 'detalle');
     $r->add('POST', '/api/propuestas/crear', PropuestaController::class, 'crear');
     $r->add('GET', '/api/reportes/cobros', ReporteController::class, 'cobrosPorFecha');
