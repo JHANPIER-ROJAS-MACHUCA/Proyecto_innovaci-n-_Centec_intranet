@@ -79,13 +79,3 @@ class GerenciaService
         ];
     }
 }
-
-class GerenciaController
-{
-    public static function sucursales(AppRequest $req): void
-    {
-        RoleMiddleware::require([8, 1]);
-        $idS = isset($req->query['idS']) && $req->query['idS'] !== '' ? (int) $req->query['idS'] : null;
-        Response::json(['data' => GerenciaService::porSucursal($idS), 'success' => true]);
-    }
-}

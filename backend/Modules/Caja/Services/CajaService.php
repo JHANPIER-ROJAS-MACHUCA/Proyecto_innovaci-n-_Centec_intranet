@@ -35,9 +35,10 @@ class CajaService
     {
         if ($monto === null || $monto === '') throw new DomainException('monto requerido.');
         CajaRepository::cerrar($idU, $monto);
-        // Spec #4: snapshot de avance del día al cerrar (mejor esfuerzo)
+        // Spec #4: snapshot de avance del día al cerrar (mejor esfuerzo).
+        // Hook Caja → Reportes (analítica; sin dependencia inversa).
         try {
-            require_once __DIR__ . '/../../../services/AvanceService.php';
+            require_once __DIR__ . '/../../Reportes/Services/AvanceService.php';
             AvanceService::guardarSnapshot(date('Y-m-d'), $idU);
         } catch (\Throwable $e) {}
     }

@@ -6,7 +6,6 @@ require_once __DIR__ . '/../Modules/Caja/Controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/CatalogoController.php';
 require_once __DIR__ . '/../controllers/CampoController.php';
 require_once __DIR__ . '/../controllers/CpanelController.php';
-require_once __DIR__ . '/../controllers/ReporteController.php';
 require_once __DIR__ . '/../controllers/OperacionController.php';
 require_once __DIR__ . '/../Modules/Evaluacion/Controllers/EvaluacionController.php';
 require_once __DIR__ . '/../Modules/Evaluacion/Controllers/DocumentoController.php';
@@ -23,8 +22,9 @@ require_once __DIR__ . '/../Modules/Creditos/Controllers/MoraController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/MantenimientoController.php';
 require_once __DIR__ . '/../Modules/Propuestas/Controllers/PropuestaController.php';
 require_once __DIR__ . '/../Modules/Ahorros/Controllers/AhorroController.php';
-require_once __DIR__ . '/../services/AvanceService.php';
-require_once __DIR__ . '/../services/GerenciaService.php';
+require_once __DIR__ . '/../Modules/Reportes/Controllers/ReporteController.php';
+require_once __DIR__ . '/../Modules/Reportes/Controllers/AvanceController.php';
+require_once __DIR__ . '/../Modules/Reportes/Controllers/GerenciaController.php';
 
 return function (Router $r) {
     $r->add('GET', '/', HealthController::class, 'index');
@@ -62,15 +62,8 @@ return function (Router $r) {
     $r->add('POST', '/api/usuarios/mi-perfil', UsuarioController::class, 'miPerfil');
     $r->add('POST', '/api/usuarios/cambiar-clave', UsuarioController::class, 'cambiarClave');
     $r->add('GET', '/api/metas/por-usuario', MetaController::class, 'porUsuario');
-    $r->add('POST', '/api/caja/cerrar', CajaController::class, 'cerrar');
-    $r->add('GET', '/api/boveda/saldos', BovedaController::class, 'saldos');
-    $r->add('POST', '/api/boveda/consumir', BovedaController::class, 'consumir');
-    $r->add('POST', '/api/boveda/designar', BovedaController::class, 'designar');
-    $r->add('GET', '/api/reportes/moras-dias', ReporteController::class, 'morasPorDias');
-    $r->add('GET', '/api/reportes/sentinel', ReporteController::class, 'sentinel');
-    $r->add('GET', '/api/reportes/cancelados', ReporteController::class, 'cancelados');
-    $r->add('GET', '/api/reportes/sin-creditos', ReporteController::class, 'sinCreditos');
-    $r->add('GET', '/api/reportes/vinculaciones', ReporteController::class, 'vinculaciones');
+    // Módulo Reportes — ver backend/Modules/Reportes/
+    (require __DIR__ . '/../Modules/Reportes/routes.php')($r);
     $r->add('GET', '/api/campo/credit-to-pay', CampoController::class, 'creditToPay');
     $r->add('GET', '/api/campo/cobros-hoy', CampoController::class, 'cobrosHoy');
     $r->add('GET', '/api/campo/cobros-realizados', CampoController::class, 'cobrosRealizados');
@@ -82,14 +75,8 @@ return function (Router $r) {
     $r->add('GET', '/api/cpanel/resumen', CpanelController::class, 'resumen');
     $r->add('GET', '/api/empresa', EmpresaController::class, 'ver');
     $r->add('POST', '/api/empresa/actualizar', EmpresaController::class, 'actualizar');
-    $r->add('GET', '/api/reportes/proyecciones', ReporteController::class, 'proyecciones');
-    $r->add('GET', '/api/reportes/ahorros-fecha', ReporteController::class, 'ahorrosPorFecha');
-    $r->add('GET', '/api/reportes/eliminados', ReporteController::class, 'eliminados');
     $r->add('GET', '/api/propuestas/detalle', PropuestaController::class, 'detalle');
     $r->add('POST', '/api/propuestas/crear', PropuestaController::class, 'crear');
-    $r->add('GET', '/api/reportes/cobros', ReporteController::class, 'cobrosPorFecha');
-    $r->add('GET', '/api/reportes/desembolsos', ReporteController::class, 'desembolsosPorFecha');
-    $r->add('GET', '/api/reportes/cierre', ReporteController::class, 'cierre');
     // Módulo Caja (caja/bóveda/billetaje/recibos/extornos) — ver backend/Modules/Caja/
     (require __DIR__ . '/../Modules/Caja/routes.php')($r);
     $r->add('GET', '/api/justificaciones', JustificacionController::class, 'listar');
@@ -99,9 +86,4 @@ return function (Router $r) {
     (require __DIR__ . '/../Modules/Sucursales/routes.php')($r);
     // RBAC — ver backend/Modules/Rbac/
     (require __DIR__ . '/../Modules/Rbac/routes.php')($r);
-    // Spec 2026: avance/gerencia (caja segura vive en su módulo)
-    $r->add('GET', '/api/cobros/avance', AvanceController::class, 'ver');
-    $r->add('POST', '/api/cobros/avance/guardar', AvanceController::class, 'guardar');
-    $r->add('GET', '/api/cobros/avance/snapshot', AvanceController::class, 'snapshot');
-    $r->add('GET', '/api/gerencia/sucursales', GerenciaController::class, 'sucursales');
 };
