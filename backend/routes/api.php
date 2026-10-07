@@ -14,7 +14,7 @@ require_once __DIR__ . '/../controllers/OperacionController.php';
 require_once __DIR__ . '/../controllers/EvaluacionController.php';
 require_once __DIR__ . '/../controllers/RegistroClienteController.php';
 require_once __DIR__ . '/../controllers/HealthController.php';
-require_once __DIR__ . '/../controllers/SucursalController.php';
+require_once __DIR__ . '/../Modules/Sucursales/Controllers/SucursalController.php';
 require_once __DIR__ . '/../services/RbacService.php';
 require_once __DIR__ . '/../services/ClasificacionService.php';
 require_once __DIR__ . '/../services/AvanceService.php';
@@ -141,16 +141,8 @@ return function (Router $r) {
     $r->add('GET', '/api/documentos/formatos', DocumentoController::class, 'formatos');
     $r->add('POST', '/api/clientes/registro-completo', RegistroClienteController::class, 'crearCompleto');
     $r->add('GET', '/api/clientes/ficha-completa', RegistroClienteController::class, 'fichaCompleta');
-    // Módulo sucursales traído de CENTECPC (SucursalesController + SucursalesModel + PagoCliente)
-    $r->add('GET', '/api/sucursales', SucursalController::class, 'listar');
-    $r->add('GET', '/api/sucursales/home', SucursalController::class, 'home');
-    $r->add('GET', '/api/sucursales/detalle', SucursalController::class, 'detalle');
-    $r->add('GET', '/api/sucursales/metodos-pago', SucursalController::class, 'metodosPago');
-    $r->add('GET', '/api/sucursales/deudas', SucursalController::class, 'deudas');
-    $r->add('GET', '/api/sucursales/contexto-pago', SucursalController::class, 'contextoPago');
-    $r->add('GET', '/api/sucursales/comprobantes', SucursalController::class, 'comprobantes');
-    $r->add('POST', '/api/sucursales/horario-pago', SucursalController::class, 'horarioPago');
-    $r->add('POST', '/api/sucursales/contacto', SucursalController::class, 'contacto');
+    // Módulo sucursales traído de CENTECPC — ver backend/Modules/Sucursales/
+    (require __DIR__ . '/../Modules/Sucursales/routes.php')($r);
     // RBAC: Usuario → Rol → Permisos → Módulos → Vistas → Acciones
     $r->add('GET', '/api/rbac/mis-permisos', RbacController::class, 'misPermisos');
     $r->add('GET', '/api/rbac/matriz', RbacController::class, 'matriz');
