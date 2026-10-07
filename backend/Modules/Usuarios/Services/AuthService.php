@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../repositories/UserRepository.php';
-require_once __DIR__ . '/../utils/Password.php';
+// Módulo Usuarios — autenticación (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/UserRepository.php';
+require_once __DIR__ . '/../../../utils/Password.php';
 
 class AuthService
 {

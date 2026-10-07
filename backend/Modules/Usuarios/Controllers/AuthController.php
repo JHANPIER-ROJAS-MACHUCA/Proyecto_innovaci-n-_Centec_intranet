@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../services/AuthService.php';
+// Módulo Usuarios — autenticación (movido de controllers/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/AuthService.php';
 
 class AuthController
 {

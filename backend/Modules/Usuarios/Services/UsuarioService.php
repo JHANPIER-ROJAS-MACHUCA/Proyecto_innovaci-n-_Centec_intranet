@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../repositories/UserRepository.php';
-require_once __DIR__ . '/../utils/Password.php';
+// Módulo Usuarios — servicio (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/UserRepository.php';
+require_once __DIR__ . '/../../../utils/Password.php';
 
 // Roles creables por TI (códigos CENTECPC tabla `rol`).
 class UsuarioService
@@ -85,7 +86,7 @@ class UsuarioService
     {
         $d = \App\Models\Tdatosu::where('idU', $idU)->first(['fotoU']);
         if ($d && $d->fotoU) {
-            @unlink(dirname(__DIR__) . '/storage/profiles/' . $d->fotoU);
+            @unlink(dirname(__DIR__, 3) . '/storage/profiles/' . $d->fotoU);
             \App\Models\Tdatosu::where('idU', $idU)->update(['fotoU' => null]);
         }
     }

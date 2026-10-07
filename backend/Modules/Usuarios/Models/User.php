@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 // Tabla identidad CENTECPC: tusuarios (credencial+rol) + tdatosu (datos personales).
 // idRol usa códigos CENTECPC: 1 Super Admin, 2 Asesor, 3 Cliente, 4 Postulante,
 // 5 admin_personal, 6 Soporte Web, 7 Plataforma, 8 Gerente, 9 Seguimiento.
+// (Separado de models/User.php triple, phase2-modular; idéntico.)
 
 class User extends Model
 {
@@ -64,19 +65,4 @@ class User extends Model
         if ($d) return $d->apU . ' ' . $d->amU . ' ' . $d->nomU;
         return $this->userU;
     }
-}
-
-class Tdatosu extends Model
-{
-    protected $table = 'tdatosu';
-    protected $primaryKey = 'idD';
-    public $timestamps = false;
-    protected $guarded = [];
-}
-
-class Rol extends Model
-{
-    protected $table = 'rol';
-    public $timestamps = false;
-    protected $guarded = [];
 }

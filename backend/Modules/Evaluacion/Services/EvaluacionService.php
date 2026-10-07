@@ -171,7 +171,7 @@ class EvaluacionService
         $ext = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION));
         if (!in_array($ext, ['jpg','jpeg','png','gif','webp'], true)) return null;
         if ((int) ($file['size'] ?? 0) > 10 * 1024 * 1024) return null;
-        $dir = __DIR__ . '/../storage/evidencias/';
+        $dir = __DIR__ . '/../../../storage/evidencias/';
         if (!is_dir($dir)) @mkdir($dir, 0755, true);
         $base = $grupo . '_' . $pref . '_' . $idx . '_' . bin2hex(random_bytes(4));
         $dest = $dir . $base . '.webp';

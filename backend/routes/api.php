@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../controllers/AuthController.php';
-require_once __DIR__ . '/../controllers/UsuarioController.php';
+require_once __DIR__ . '/../Modules/Usuarios/Controllers/AuthController.php';
+require_once __DIR__ . '/../Modules/Usuarios/Controllers/UsuarioController.php';
 require_once __DIR__ . '/../Modules/Caja/Controllers/CajaController.php';
 require_once __DIR__ . '/../Modules/Caja/Controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/CatalogoController.php';
@@ -29,15 +29,9 @@ return function (Router $r) {
     $r->add('GET', '/', HealthController::class, 'index');
     $r->add('GET', '/api', HealthController::class, 'index');
     $r->add('GET', '/api/health', HealthController::class, 'health');
-    $r->add('POST', '/api/auth/login', AuthController::class, 'login');
-    $r->add('POST', '/api/auth/logout', AuthController::class, 'logout');
-    $r->add('GET', '/api/auth/me', AuthController::class, 'me');
+    // Módulo Usuarios (auth + gestión) — ver backend/Modules/Usuarios/
+    (require __DIR__ . '/../Modules/Usuarios/routes.php')($r);
     $r->add('GET', '/api/caja/estado', CajaController::class, 'estado');
-    $r->add('GET', '/api/usuarios', UsuarioController::class, 'list');
-    $r->add('POST', '/api/usuarios/reset', UsuarioController::class, 'resetPassword');
-    $r->add('POST', '/api/usuarios/toggle', UsuarioController::class, 'toggleEstado');
-    $r->add('POST', '/api/usuarios/actualizar', UsuarioController::class, 'update');
-    $r->add('POST', '/api/usuarios', UsuarioController::class, 'create');
     // Módulo Clientes — ver backend/Modules/Clientes/
     (require __DIR__ . '/../Modules/Clientes/routes.php')($r);
     // Módulo Créditos (cobros incluidos) — ver backend/Modules/Creditos/

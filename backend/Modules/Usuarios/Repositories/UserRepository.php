@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../utils/Password.php';
+// Módulo Usuarios — repositorio (movido de repositories/, phase2-modular).
+require_once __DIR__ . '/../../../utils/Password.php';
 
 // Usuarios en esquema CENTECPC: tusuarios (credencial) + tdatosu (datos).
 // Login por DNI (tdatosu.dniU), como antes, pero contra tablas originales.

@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../services/UsuarioService.php';
-require_once __DIR__ . '/../repositories/UserRepository.php';
+// Módulo Usuarios — controlador (movido de controllers/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/UsuarioService.php';
+require_once __DIR__ . '/../Repositories/UserRepository.php';
 
 class UsuarioController
 {
@@ -54,7 +55,7 @@ class UsuarioController
         $user = AuthMiddleware::requireAuth();
         if (empty($_FILES['file'])) Response::error('Archivo requerido.', 422);
         $name = time() . '_' . preg_replace('/[^A-Za-z0-9._-]/', '', basename($_FILES['file']['name']));
-        $dest = dirname(__DIR__) . '/storage/profiles/' . $name;
+        $dest = dirname(__DIR__, 3) . '/storage/profiles/' . $name;
         if (!move_uploaded_file($_FILES['file']['tmp_name'], $dest)) Response::error('No se pudo guardar.', 500);
         UsuarioService::setAvatar((int) $user['idU'], $name);
         Response::json(['data' => ['img' => $name], 'success' => true]);
