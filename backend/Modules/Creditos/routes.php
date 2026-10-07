@@ -23,4 +23,5 @@ return function (Router $r) {
     $r->add('GET', '/api/mora/deudores', MoraController::class, 'deudores');
     $r->add('POST', '/api/mantenimiento/limpiar-moras', MantenimientoController::class, 'limpiarMoras');
     $r->add('POST', '/api/cobros/condonar-todas', MantenimientoController::class, 'condonarTodas');
+    $r->add('GET', '/api/formatos/contrato', FormatoController::class, 'contrato');
 };

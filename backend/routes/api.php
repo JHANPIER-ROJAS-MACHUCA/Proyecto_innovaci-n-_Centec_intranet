@@ -19,7 +19,8 @@ require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CreditoController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CobroController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/MoraController.php';
-require_once __DIR__ . '/../Modules/Creditos/Controllers/MantenimientoController.php';
+require_once __DIR__ . '/../Modules/Creditos/Controllers/FormatoController.php';
+require_once __DIR__ . '/../Modules/Campo/Controllers/CampoController.php';
 require_once __DIR__ . '/../Modules/Propuestas/Controllers/PropuestaController.php';
 require_once __DIR__ . '/../Modules/Ahorros/Controllers/AhorroController.php';
 require_once __DIR__ . '/../Modules/Reportes/Controllers/ReporteController.php';
@@ -64,14 +65,12 @@ return function (Router $r) {
     $r->add('GET', '/api/metas/por-usuario', MetaController::class, 'porUsuario');
     // Módulo Reportes — ver backend/Modules/Reportes/
     (require __DIR__ . '/../Modules/Reportes/routes.php')($r);
-    $r->add('GET', '/api/campo/credit-to-pay', CampoController::class, 'creditToPay');
-    $r->add('GET', '/api/campo/cobros-hoy', CampoController::class, 'cobrosHoy');
-    $r->add('GET', '/api/campo/cobros-realizados', CampoController::class, 'cobrosRealizados');
+    // Módulo Campo — ver backend/Modules/Campo/
+    (require __DIR__ . '/../Modules/Campo/routes.php')($r);
     $r->add('GET', '/api/util/dni', DniController::class, 'consultar');
     $r->add('GET', '/api/util/distritos', UbigeoController::class, 'distritos');
     $r->add('GET', '/api/util/provincias', UbigeoController::class, 'provincias');
     $r->add('GET', '/api/util/departamentos', UbigeoController::class, 'departamentos');
-    $r->add('GET', '/api/formatos/contrato', FormatoController::class, 'contrato');
     $r->add('GET', '/api/cpanel/resumen', CpanelController::class, 'resumen');
     $r->add('GET', '/api/empresa', EmpresaController::class, 'ver');
     $r->add('POST', '/api/empresa/actualizar', EmpresaController::class, 'actualizar');
