@@ -32,6 +32,16 @@ class TransaccionRepository
             ->orderBy('idCAD', 'desc')->limit($limit)->get();
     }
 
+    // Spec #20b: solo cobros (tipo=3) de la caja, con cliente
+    public static function cobrosDeCaja(int $idCA, int $limit = 200)
+    {
+        global $capsule;
+        return $capsule->table('tcaja_usu_detal as t')
+            ->leftJoin('tclie_general as c', 't.cliente', 'c.idCG')
+            ->where('t.idCA', $idCA)->where('t.tipo', 3)
+            ->select('t.*', 'c.dni', 'c.ap', 'c.nom')->orderBy('t.idCAD', 'desc')->limit($limit)->get();
+    }
+
     public static function operacionesCliente(int $idCG, int $limit = 200)
     {
         global $capsule;

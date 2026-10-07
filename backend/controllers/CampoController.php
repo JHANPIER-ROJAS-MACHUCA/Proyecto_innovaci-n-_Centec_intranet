@@ -28,12 +28,7 @@ class CampoController
         $user = AuthMiddleware::requireAuth();
         $caja = CajaService::habilitada($user);
         if (!$caja) Response::json(['data' => [], 'success' => true]);
-        global $capsule;
-        $rows = $capsule->table('tcaja_usu_detal as t')
-            ->leftJoin('tclie_general as c', 't.cliente', 'c.idCG')
-            ->where('t.idCA', $caja->idCA)->where('t.tipo', 3)
-            ->select('t.*', 'c.dni', 'c.ap', 'c.nom')->orderBy('t.idCAD', 'desc')->limit(200)->get();
-        Response::json(['data' => $rows, 'success' => true]);
+        Response::json(['data' => TransaccionRepository::cobrosDeCaja($caja->idCA), 'success' => true]);
     }
 }
 

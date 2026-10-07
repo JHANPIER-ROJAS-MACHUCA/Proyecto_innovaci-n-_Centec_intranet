@@ -2,6 +2,7 @@
 // Módulo Clientes — servicio de cartas (extraído de ClasificacionService.php,
 // phase2-modular; idéntico).
 require_once __DIR__ . '/ClasificacionService.php';
+require_once __DIR__ . '/../Repositories/ClienteRepository.php';
 
 class CartaService
 {
@@ -42,18 +43,12 @@ class CartaService
 
     public static function registrar(int $idCG, string $tipo, ?string $tramo, string $titulo, string $contenido, int $idU): int
     {
-        global $capsule;
         if (!in_array($tipo, ['invitacion', 'cobranza'], true)) throw new DomainException('Tipo inválido.');
-        return $capsule->table('carta_cobranza')->insertGetId([
-            'idCG' => $idCG, 'tipo' => $tipo, 'tramo' => $tramo, 'titulo' => $titulo,
-            'contenido' => $contenido, 'idU' => $idU, 'created_at' => date('Y-m-d H:i:s'),
-        ]);
+        return ClienteRepository::registrarCarta($idCG, $tipo, $tramo, $titulo, $contenido, $idU);
     }
 
     public static function historial(int $idCG): array
     {
-        global $capsule;
-        return $capsule->table('carta_cobranza')->where('idCG', $idCG)->orderByDesc('id')->limit(50)
-            ->get()->map(fn($r) => (array) $r)->all();
+        return ClienteRepository::historialCartas($idCG);
     }
 }

@@ -46,4 +46,20 @@ class ClienteRepository
             ->where('d.id', $ubigeoId)
             ->select('d.name as district', 'p.name as province', 'dep.name as department')->first();
     }
+
+    public static function registrarCarta(int $idCG, string $tipo, ?string $tramo, string $titulo, string $contenido, int $idU): int
+    {
+        global $capsule;
+        return $capsule->table('carta_cobranza')->insertGetId([
+            'idCG' => $idCG, 'tipo' => $tipo, 'tramo' => $tramo, 'titulo' => $titulo,
+            'contenido' => $contenido, 'idU' => $idU, 'created_at' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    public static function historialCartas(int $idCG): array
+    {
+        global $capsule;
+        return $capsule->table('carta_cobranza')->where('idCG', $idCG)->orderByDesc('id')->limit(50)
+            ->get()->map(fn($r) => (array) $r)->all();
+    }
 }
