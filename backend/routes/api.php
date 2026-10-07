@@ -3,10 +3,14 @@ require_once __DIR__ . '/../Modules/Usuarios/Controllers/AuthController.php';
 require_once __DIR__ . '/../Modules/Usuarios/Controllers/UsuarioController.php';
 require_once __DIR__ . '/../Modules/Caja/Controllers/CajaController.php';
 require_once __DIR__ . '/../Modules/Caja/Controllers/OperativaController.php';
-require_once __DIR__ . '/../controllers/CatalogoController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/RelacionController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/OficinaController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/EmpresaController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/MetaController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/JustificacionController.php';
+require_once __DIR__ . '/../Modules/Catalogos/Controllers/AdjuntoController.php';
 require_once __DIR__ . '/../controllers/CampoController.php';
 require_once __DIR__ . '/../controllers/CpanelController.php';
-require_once __DIR__ . '/../controllers/OperacionController.php';
 require_once __DIR__ . '/../Modules/Evaluacion/Controllers/EvaluacionController.php';
 require_once __DIR__ . '/../Modules/Evaluacion/Controllers/DocumentoController.php';
 require_once __DIR__ . '/../controllers/HealthController.php';
@@ -40,24 +44,11 @@ return function (Router $r) {
     (require __DIR__ . '/../Modules/Creditos/routes.php')($r);
     // Módulo Ahorros — ver backend/Modules/Ahorros/
     (require __DIR__ . '/../Modules/Ahorros/routes.php')($r);
-    $r->add('POST', '/api/metas/eliminar', MetaController::class, 'eliminar');
-    $r->add('GET', '/api/metas', MetaController::class, 'listar');
-    $r->add('POST', '/api/metas/actualizar', MetaController::class, 'actualizar');
-    $r->add('POST', '/api/metas', MetaController::class, 'crear');
-    $r->add('POST', '/api/justificaciones/eliminar', JustificacionController::class, 'eliminar');
-    $r->add('POST', '/api/justificaciones/actualizar', JustificacionController::class, 'actualizar');
-    $r->add('POST', '/api/justificaciones', JustificacionController::class, 'crear');
-    $r->add('POST', '/api/adjuntos/subir', AdjuntoController::class, 'subir');
-    $r->add('POST', '/api/adjuntos/eliminar', AdjuntoController::class, 'eliminar');
-    $r->add('POST', '/api/adjuntos', AdjuntoController::class, 'crear');
-    $r->add('GET', '/api/relaciones', RelacionController::class, 'list');
-    $r->add('POST', '/api/relaciones/eliminar', RelacionController::class, 'delete');
-    $r->add('POST', '/api/relaciones', RelacionController::class, 'add');
-    $r->add('GET', '/api/oficinas', OficinaController::class, 'list');
+    // Módulo Catálogos — ver backend/Modules/Catalogos/
+    (require __DIR__ . '/../Modules/Catalogos/routes.php')($r);
     // Módulo Propuestas — ver backend/Modules/Propuestas/
     (require __DIR__ . '/../Modules/Propuestas/routes.php')($r);
     $r->add('POST', '/api/cobros/simular', CobroController::class, 'simular');
-    $r->add('GET', '/api/adjuntos', AdjuntoController::class, 'listar');
     $r->add('POST', '/api/usuarios/avatar', UsuarioController::class, 'avatar');
     $r->add('POST', '/api/usuarios/eliminar-avatar', UsuarioController::class, 'eliminarAvatar');
     $r->add('POST', '/api/usuarios/mi-perfil', UsuarioController::class, 'miPerfil');
@@ -72,8 +63,6 @@ return function (Router $r) {
     $r->add('GET', '/api/util/provincias', UbigeoController::class, 'provincias');
     $r->add('GET', '/api/util/departamentos', UbigeoController::class, 'departamentos');
     $r->add('GET', '/api/cpanel/resumen', CpanelController::class, 'resumen');
-    $r->add('GET', '/api/empresa', EmpresaController::class, 'ver');
-    $r->add('POST', '/api/empresa/actualizar', EmpresaController::class, 'actualizar');
     // Módulo Caja (caja/bóveda/billetaje/recibos/extornos) — ver backend/Modules/Caja/
     (require __DIR__ . '/../Modules/Caja/routes.php')($r);
     $r->add('GET', '/api/justificaciones', JustificacionController::class, 'listar');
