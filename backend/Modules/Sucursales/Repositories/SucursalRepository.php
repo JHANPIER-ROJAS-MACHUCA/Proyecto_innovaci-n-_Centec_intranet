@@ -1,8 +1,5 @@
 <?php
-// (bootstrap solo carga models/*.php no recursivo: el módulo trae los suyos)
-require_once __DIR__ . '/../Models/Sucursal.php';
-
-// Puerto de:
+// Puerto de: (bootstrap carga Models del módulo automáticamente)
 // - C:\xampp\htdocs\CENTECPC\app\Modules\Sucursales\Models\SucursalesModel.php
 // - C:\xampp\htdocs\CENTECPC\app\Modules\Sucursales\Models\PagoCliente.php (lecturas)
 // - C:\xampp\htdocs\CENTECPC\app\Modules\Admin\models\Sucursal.php::getAsesoresDeSucursal
