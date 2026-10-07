@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../repositories/CajaRepository.php';
+// Módulo Caja — servicio (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/CajaRepository.php';
 
 class CajaService
 {
@@ -36,10 +37,8 @@ class CajaService
         CajaRepository::cerrar($idU, $monto);
         // Spec #4: snapshot de avance del día al cerrar (mejor esfuerzo)
         try {
-            if (file_exists(__DIR__ . '/AvanceService.php')) {
-                require_once __DIR__ . '/AvanceService.php';
-                AvanceService::guardarSnapshot(date('Y-m-d'), $idU);
-            }
+            require_once __DIR__ . '/../../../services/AvanceService.php';
+            AvanceService::guardarSnapshot(date('Y-m-d'), $idU);
         } catch (\Throwable $e) {}
     }
 
@@ -47,7 +46,7 @@ class CajaService
     // queda bloqueado para cobros y cargas de recibos (incluye faltante/sobrante).
     public static function bloqueoBilletaje(int $idU): ?array
     {
-        require_once __DIR__ . '/../repositories/OperativaRepository.php';
+        require_once __DIR__ . '/../Repositories/OperativaRepository.php';
         return BilletajeRepository::bloqueoHoy($idU);
     }
 

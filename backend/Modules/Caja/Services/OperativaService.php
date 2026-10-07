@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../repositories/OperativaRepository.php';
-require_once __DIR__ . '/../repositories/CajaRepository.php';
+// Módulo Caja — operativa (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/OperativaRepository.php';
+require_once __DIR__ . '/../Repositories/CajaRepository.php';
 
 class BilletajeService
 {    const DENOM = ['b200' => 200, 'b100' => 100, 'b50' => 50, 'b20' => 20, 'b10' => 10, 'm5' => 5, 'm2' => 2, 'm1' => 1, 'm05' => 0.5, 'm02' => 0.2, 'm01' => 0.1];

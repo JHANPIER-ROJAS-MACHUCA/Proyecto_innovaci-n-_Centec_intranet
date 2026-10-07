@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../services/CajaService.php';
-require_once __DIR__ . '/../services/OperativaService.php';
+// Módulo Caja — aperturas, billetaje, recibos, extornos (movido, phase2-modular).
+require_once __DIR__ . '/../Services/CajaService.php';
+require_once __DIR__ . '/../Services/OperativaService.php';
 
 class AperturaController
 {

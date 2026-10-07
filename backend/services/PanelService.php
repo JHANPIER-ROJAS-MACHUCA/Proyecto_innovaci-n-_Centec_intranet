@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../repositories/CatalogoRepository.php';
-require_once __DIR__ . '/../repositories/CajaRepository.php';
+require_once __DIR__ . '/../Modules/Caja/Repositories/CajaRepository.php';
 require_once __DIR__ . '/../repositories/FinancieraRepository.php';
 require_once __DIR__ . '/../repositories/UbigeoRepository.php';
 

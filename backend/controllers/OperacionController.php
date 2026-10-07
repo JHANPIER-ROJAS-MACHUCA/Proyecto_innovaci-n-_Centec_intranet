@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../services/AhorroService.php';
 require_once __DIR__ . '/../services/CatalogoService.php';
+require_once __DIR__ . '/../Modules/Caja/Services/CajaService.php';
 
 class AhorroController
 {

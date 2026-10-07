@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UsuarioController.php';
-require_once __DIR__ . '/../controllers/CajaController.php';
+require_once __DIR__ . '/../Modules/Caja/Controllers/CajaController.php';
+require_once __DIR__ . '/../Modules/Caja/Controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/CatalogoController.php';
 require_once __DIR__ . '/../controllers/CampoController.php';
 require_once __DIR__ . '/../controllers/CpanelController.php';
-require_once __DIR__ . '/../controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/ReporteController.php';
 require_once __DIR__ . '/../controllers/OperacionController.php';
 require_once __DIR__ . '/../Modules/Evaluacion/Controllers/EvaluacionController.php';
@@ -84,8 +84,6 @@ return function (Router $r) {
     $r->add('GET', '/api/util/distritos', UbigeoController::class, 'distritos');
     $r->add('GET', '/api/util/provincias', UbigeoController::class, 'provincias');
     $r->add('GET', '/api/util/departamentos', UbigeoController::class, 'departamentos');
-    $r->add('POST', '/api/mantenimiento/limpiar-moras', MantenimientoController::class, 'limpiarMoras');
-    $r->add('POST', '/api/cobros/condonar-todas', MantenimientoController::class, 'condonarTodas');
     $r->add('GET', '/api/formatos/contrato', FormatoController::class, 'contrato');
     $r->add('GET', '/api/cpanel/resumen', CpanelController::class, 'resumen');
     $r->add('GET', '/api/empresa', EmpresaController::class, 'ver');
@@ -99,32 +97,18 @@ return function (Router $r) {
     $r->add('GET', '/api/reportes/cobros', ReporteController::class, 'cobrosPorFecha');
     $r->add('GET', '/api/reportes/desembolsos', ReporteController::class, 'desembolsosPorFecha');
     $r->add('GET', '/api/reportes/cierre', ReporteController::class, 'cierre');
-    $r->add('GET', '/api/caja/movimientos', ReporteController::class, 'movimientos');
-    $r->add('POST', '/api/caja/abrir-gerencia', AperturaController::class, 'abrirGerencia');
-    $r->add('POST', '/api/caja/abrir-oficina', AperturaController::class, 'abrirOficina');
-    $r->add('GET', '/api/billetaje/pendientes', BilletajeController::class, 'pendientes');
-    $r->add('POST', '/api/billetaje/confirmar', BilletajeController::class, 'confirmar');
-    $r->add('POST', '/api/billetaje', BilletajeController::class, 'registrar');
-    $r->add('GET', '/api/recibos/motivos', ReciboController::class, 'motivos');
-    $r->add('POST', '/api/recibos', ReciboController::class, 'registrar');
-    $r->add('GET', '/api/extornos', ExtornoController::class, 'listar');
-    $r->add('POST', '/api/extornos/resolver', ExtornoController::class, 'resolver');
+    // Módulo Caja (caja/bóveda/billetaje/recibos/extornos) — ver backend/Modules/Caja/
+    (require __DIR__ . '/../Modules/Caja/routes.php')($r);
     $r->add('GET', '/api/justificaciones', JustificacionController::class, 'listar');
-    $r->add('POST', '/api/extornos', ExtornoController::class, 'solicitar');
     // Módulo evaluador + documentos — ver backend/Modules/Evaluacion/
     (require __DIR__ . '/../Modules/Evaluacion/routes.php')($r);
-    // Spec 2026: avance/gerencia/caja segura (clientes/cartas viven en su módulo)
-    // Módulo sucursales traído de CENTECPC — ver backend/Modules/Sucursales/
+    // Módulo sucursales — ver backend/Modules/Sucursales/
     (require __DIR__ . '/../Modules/Sucursales/routes.php')($r);
-    // RBAC: Usuario → Rol → Permisos → Módulos → Vistas → Acciones (módulo)
+    // RBAC — ver backend/Modules/Rbac/
     (require __DIR__ . '/../Modules/Rbac/routes.php')($r);
-    // Spec 2026: avance/gerencia/caja segura (clientes/cartas viven en su módulo)
+    // Spec 2026: avance/gerencia (caja segura vive en su módulo)
     $r->add('GET', '/api/cobros/avance', AvanceController::class, 'ver');
     $r->add('POST', '/api/cobros/avance/guardar', AvanceController::class, 'guardar');
     $r->add('GET', '/api/cobros/avance/snapshot', AvanceController::class, 'snapshot');
-    $r->add('GET', '/api/caja/bloqueo', CajaController::class, 'bloqueo');
-    $r->add('POST', '/api/boveda/aceptar', BovedaController::class, 'aceptar');
-    $r->add('POST', '/api/boveda/eliminar', BovedaController::class, 'eliminarAsignacion');
-    $r->add('GET', '/api/boveda/pendientes', BovedaController::class, 'pendientesAceptar');
     $r->add('GET', '/api/gerencia/sucursales', GerenciaController::class, 'sucursales');
 };

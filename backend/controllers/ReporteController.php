@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../services/ReporteService.php';
-require_once __DIR__ . '/../services/CajaService.php';
+require_once __DIR__ . '/../Modules/Caja/Services/CajaService.php';
 
 class ReporteController
 {

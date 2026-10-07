@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../services/CajaService.php';
-require_once __DIR__ . '/../services/ReporteService.php';
+// Módulo Caja — controlador (movido de controllers/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/CajaService.php';
+require_once __DIR__ . '/../../../services/ReporteService.php';
 
 class CajaController
 {

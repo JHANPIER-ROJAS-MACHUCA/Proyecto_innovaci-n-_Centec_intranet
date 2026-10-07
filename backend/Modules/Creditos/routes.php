@@ -21,4 +21,6 @@ return function (Router $r) {
     $r->add('POST', '/api/cobros/eliminar', CobroController::class, 'eliminarTransaccion');
     $r->add('POST', '/api/cobros/simular', CobroController::class, 'simular');
     $r->add('GET', '/api/mora/deudores', MoraController::class, 'deudores');
+    $r->add('POST', '/api/mantenimiento/limpiar-moras', MantenimientoController::class, 'limpiarMoras');
+    $r->add('POST', '/api/cobros/condonar-todas', MantenimientoController::class, 'condonarTodas');
 };
