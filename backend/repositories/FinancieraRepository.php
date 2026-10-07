@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class TransaccionRepository
 {
     public static function eliminar(int $idCAD): void
@@ -30,6 +30,16 @@ class TransaccionRepository
         global $capsule;
         return $capsule->table('tcaja_usu_detal')->where('idCA', $idCA)
             ->orderBy('idCAD', 'desc')->limit($limit)->get();
+    }
+
+    // Spec #20b: solo cobros (tipo=3) de la caja, con cliente
+    public static function cobrosDeCaja(int $idCA, int $limit = 200)
+    {
+        global $capsule;
+        return $capsule->table('tcaja_usu_detal as t')
+            ->leftJoin('tclie_general as c', 't.cliente', 'c.idCG')
+            ->where('t.idCA', $idCA)->where('t.tipo', 3)
+            ->select('t.*', 'c.dni', 'c.ap', 'c.nom')->orderBy('t.idCAD', 'desc')->limit($limit)->get();
     }
 
     public static function operacionesCliente(int $idCG, int $limit = 200)
@@ -118,7 +128,7 @@ class TransaccionRepository
                 ]);
             }
             $conn->commit();
-            return ['operationNumber' => $transaction->idCAD, 'message' => 'Crédito cobrado con éxito!!', 'success' => true];
+            return ['operationNumber' => $transaction->idCAD, 'message' => 'CrÃ©dito cobrado con Ã©xito!!', 'success' => true];
         } catch (\Throwable $th) {
             $conn->rollBack();
             throw $th;
@@ -126,121 +136,9 @@ class TransaccionRepository
     }
 }
 
-class AhorroRepository
-{
-    public static function cuenta(int $customerId): ?object
-    {
-        global $capsule;
-        return $capsule->table('tahorro')->where('id', $customerId)->first();
-    }
 
-    public static function saldo(int $idA): float
-    {
-        global $capsule;
-        $s = $capsule->table('tahorro_deta')
-            ->selectRaw('sum(if(tipo=7,monto,0)) - sum(if(tipo=8,monto,0)) as saldo')
-            ->where('idA', $idA)->where('estad', 1)->first();
-        return (float) ($s->saldo ?? 0);
-    }
+// NOTA phase2: AhorroRepository migró a Modules/Ahorros/Repositories/.
 
-    public static function crearCuenta(int $customerId): int
-    {
-        global $capsule;
-        return $capsule->table('tahorro')->insertGetId(['tipoA' => 1, 'id' => $customerId, 'motivo' => 11, 'estado' => 1]);
-    }
-
-    public static function registrarDetalle(array $row): int
-    {
-        global $capsule;
-        return $capsule->table('tahorro_deta')->insertGetId($row);
-    }
-
-    public static function registrarCaja(array $row): void
-    {
-        global $capsule;
-        $capsule->table('tcaja_usu_detal')->insert($row);
-    }
-
-    public static function detalle(int $customerId)
-    {
-        global $capsule;
-        return $capsule->table('tahorro_deta as d')
-            ->join('tahorro as a', 'd.idA', 'a.idA')
-            ->where('a.id', $customerId)->where('d.estad', 1)
-            ->orderBy('d.idAd', 'desc')->limit(100)->get();
-    }
-
-    public static function anular(int $idAd): void
-    {
-        global $capsule;
-        $conn = $capsule->getConnection();
-        $conn->beginTransaction();
-        try {
-            $capsule->table('tahorro_deta')->where('idAd', $idAd)->update(['estad' => 0]);
-            $capsule->table('tcaja_usu_detal')->where('idCuota', $idAd)->update(['estadodt' => '1']);
-            $conn->commit();
-        } catch (\Throwable $th) {
-            $conn->rollBack();
-            throw $th;
-        }
-    }
-
-    public static function porFecha(string $desde, string $hasta)
-    {
-        global $capsule;
-        return $capsule->table('tahorro_deta as d')
-            ->join('tahorro as a', 'd.idA', 'a.idA')
-            ->leftJoin('tclie_general as c', 'a.id', 'c.idCG')
-            ->where('d.estad', 1)->whereBetween('d.fecha', [$desde . ' 00:00:00', $hasta . ' 23:59:59'])
-            ->select('d.*', 'c.dni', 'c.ap', 'c.nom')->orderBy('d.idAd', 'desc')->limit(500)->get();
-    }
-}
-
-class MoraRepository
-{
-    public static function deudores(int $limit = 100)
-    {
-        global $capsule;
-        return $capsule->table('tpresta_detalle as d')
-            ->join('tprestamo as p', 'd.idP', 'p.idP')
-            ->join('tclie_general as c', 'p.idCG', 'c.idCG')
-            ->where('p.estado', 4)->where('d.estado', '!=', 1)->where('d.fechaProg', '<', date('Y-m-d'))
-            ->select('c.idCG', 'c.dni', 'c.ap', 'c.am', 'c.nom', 'p.idP', 'd.fechaProg', 'd.cuota', 'd.montoPagado')
-            ->orderBy('d.fechaProg')->limit($limit)->get();
-    }
-
-    public static function morasPorDias(int $limit = 200)
-    {
-        global $capsule;
-        return $capsule->table('tpresta_detalle as d')
-            ->join('tprestamo as p', 'd.idP', 'p.idP')
-            ->join('tclie_general as c', 'p.idCG', 'c.idCG')
-            ->where('p.estado', 4)->where('d.estado', '!=', 1)->where('d.fechaProg', '<', date('Y-m-d'))
-            ->select('c.dni', 'c.ap', 'c.nom', 'p.idP', 'd.fechaProg')
-            ->selectRaw('DATEDIFF(CURDATE(), d.fechaProg) as dias, round(d.cuota - d.montoPagado, 2) as deuda')
-            ->orderBy('dias', 'desc')->limit($limit)->get();
-    }
-
-    public static function condonar(int $creditId, string $date): void
-    {
-        global $capsule;
-        $capsule->table('condone_dates')->insert(['credit_id' => $creditId, 'date' => $date]);
-    }
-
-    public static function condonarTodas(int $creditId, array $dates): void
-    {
-        global $capsule;
-        foreach ($dates as $d) {
-            $capsule->table('condone_dates')->insert(['credit_id' => $creditId, 'date' => $d]);
-        }
-    }
-
-    public static function limpiarHuerfanas(): int
-    {
-        global $capsule;
-        return $capsule->table('tpresta_detalle')->whereNotNull('pagoMora')->whereNull('tfechaMora')->update(['pagoMora' => null]);
-    }
-}
 
 class HolidayRepository
 {

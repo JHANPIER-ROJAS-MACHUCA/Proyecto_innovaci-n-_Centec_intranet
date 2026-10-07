@@ -10,7 +10,10 @@ date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'America/Lima');
 
 require_once __DIR__ . '/../utils/Delay.php';
 require_once __DIR__ . '/../utils/Holiday.php';
+// Autoload de modelos: legacy models/*.php + módulos phase2 (Modules/*/Models/*.php).
+// Evita requires manuales por módulo; el orden legacy-primero preserva compatibilidad.
 foreach (glob(__DIR__ . '/../models/*.php') as $f) require_once $f;
+foreach (glob(__DIR__ . '/../Modules/*/Models/*.php') as $f) require_once $f;
 
 global $capsule;
 $capsule = new Capsule;
