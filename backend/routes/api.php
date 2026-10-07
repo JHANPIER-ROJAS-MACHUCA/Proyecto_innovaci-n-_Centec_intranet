@@ -19,6 +19,7 @@ require_once __DIR__ . '/../Modules/Clientes/Controllers/ClasificacionController
 require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CreditoController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CobroController.php';
+require_once __DIR__ . '/../Modules/Creditos/Controllers/MoraController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
 
@@ -58,7 +59,6 @@ return function (Router $r) {
     $r->add('GET', '/api/propuestas/detalle', PropuestaController::class, 'detalle');
     $r->add('GET', '/api/propuestas', PropuestaController::class, 'list');
     $r->add('POST', '/api/propuestas/responder', PropuestaController::class, 'responder');
-    $r->add('GET', '/api/mora/deudores', MoraController::class, 'deudores');
     $r->add('POST', '/api/cobros/simular', CobroController::class, 'simular');
     $r->add('GET', '/api/adjuntos', AdjuntoController::class, 'listar');
     $r->add('POST', '/api/usuarios/avatar', UsuarioController::class, 'avatar');

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../services/CajaService.php';
 require_once __DIR__ . '/../services/PanelService.php';
+require_once __DIR__ . '/../Modules/Creditos/Services/MoraService.php';
 
 class CampoController
 {

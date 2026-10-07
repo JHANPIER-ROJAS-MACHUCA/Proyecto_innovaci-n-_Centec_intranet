@@ -104,12 +104,3 @@ class PropuestaController
         }
     }
 }
-
-class MoraController
-{
-    public static function deudores(AppRequest $req): void
-    {
-        AuthMiddleware::requireAuth();
-        Response::json(['data' => MoraService::deudores(), 'success' => true]);
-    }
-}

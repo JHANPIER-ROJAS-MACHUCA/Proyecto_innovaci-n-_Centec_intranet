@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../repositories/FinancieraRepository.php';
 require_once __DIR__ . '/../repositories/CatalogoRepository.php';
+require_once __DIR__ . '/../Modules/Creditos/Repositories/MoraRepository.php';
 
 class TransaccionService
 {
@@ -81,28 +82,5 @@ class ReporteService
     public static function eliminados(int $page)
     {
         return TransaccionRepository::eliminados(max(1, $page));
-    }
-}
-
-class MoraService
-{    public static function deudores()
-    {
-        return MoraRepository::deudores();
-    }
-
-    public static function condonar(int $creditId, string $date): void
-    {
-        MoraRepository::condonar($creditId, $date);
-    }
-
-    public static function condonarTodas(int $creditId, array $dates): void
-    {
-        if (!$creditId || !count($dates)) throw new DomainException('creditId y dates[] requeridos.');
-        MoraRepository::condonarTodas($creditId, $dates);
-    }
-
-    public static function limpiarHuerfanas(): int
-    {
-        return MoraRepository::limpiarHuerfanas();
     }
 }

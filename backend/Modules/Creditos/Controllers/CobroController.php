@@ -1,6 +1,7 @@
 <?php
 // Módulo Creditos — controlador de cobros (movido de controllers/, phase2-modular).
 require_once __DIR__ . '/../Services/CobroService.php';
+require_once __DIR__ . '/../Services/MoraService.php';
 require_once __DIR__ . '/../../../services/ReporteService.php';
 
 class CobroController
