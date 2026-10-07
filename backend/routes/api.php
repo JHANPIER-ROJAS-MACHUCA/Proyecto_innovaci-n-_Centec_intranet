@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UsuarioController.php';
-require_once __DIR__ . '/../controllers/ClienteController.php';
 require_once __DIR__ . '/../controllers/CreditoController.php';
 require_once __DIR__ . '/../controllers/CobroController.php';
 require_once __DIR__ . '/../controllers/CajaController.php';
@@ -12,16 +11,16 @@ require_once __DIR__ . '/../controllers/OperativaController.php';
 require_once __DIR__ . '/../controllers/ReporteController.php';
 require_once __DIR__ . '/../controllers/OperacionController.php';
 require_once __DIR__ . '/../controllers/EvaluacionController.php';
-require_once __DIR__ . '/../controllers/RegistroClienteController.php';
 require_once __DIR__ . '/../controllers/HealthController.php';
 require_once __DIR__ . '/../Modules/Sucursales/Controllers/SucursalController.php';
 require_once __DIR__ . '/../Modules/Rbac/Controllers/RbacController.php';
-require_once __DIR__ . '/../services/ClasificacionService.php';
+require_once __DIR__ . '/../Modules/Clientes/Controllers/ClienteController.php';
+require_once __DIR__ . '/../Modules/Clientes/Controllers/RegistroClienteController.php';
+require_once __DIR__ . '/../Modules/Clientes/Controllers/ClasificacionController.php';
+require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
-require_once __DIR__ . '/../controllers/ClasificacionController.php';
 require_once __DIR__ . '/../services/DocumentoService.php';
-require_once __DIR__ . '/../repositories/ClienteRegistroRepository.php';
 
 return function (Router $r) {
     $r->add('GET', '/', HealthController::class, 'index');
@@ -36,11 +35,8 @@ return function (Router $r) {
     $r->add('POST', '/api/usuarios/toggle', UsuarioController::class, 'toggleEstado');
     $r->add('POST', '/api/usuarios/actualizar', UsuarioController::class, 'update');
     $r->add('POST', '/api/usuarios', UsuarioController::class, 'create');
-    $r->add('GET', '/api/clientes/search', ClienteController::class, 'search');
-    $r->add('GET', '/api/clientes/operaciones', ClienteController::class, 'operaciones');
-    $r->add('GET', '/api/clientes/detalle', ClienteController::class, 'detalle');
-    $r->add('POST', '/api/clientes/actualizar', ClienteController::class, 'update');
-    $r->add('POST', '/api/clientes', ClienteController::class, 'create');
+    // Módulo Clientes — ver backend/Modules/Clientes/
+    (require __DIR__ . '/../Modules/Clientes/routes.php')($r);
     $r->add('POST', '/api/creditos/generar', CreditoController::class, 'generar');
     $r->add('GET', '/api/creditos/por-cliente', CreditoController::class, 'byCustomer');
     $r->add('GET', '/api/creditos/detalle', CreditoController::class, 'detalle');
@@ -139,20 +135,12 @@ return function (Router $r) {
     $r->add('GET', '/api/documentos/evaluacion-word', DocumentoController::class, 'evaluacionWord');
     $r->add('GET', '/api/documentos/cliente-ficha', DocumentoController::class, 'clienteFicha');
     $r->add('GET', '/api/documentos/formatos', DocumentoController::class, 'formatos');
-    $r->add('POST', '/api/clientes/registro-completo', RegistroClienteController::class, 'crearCompleto');
-    $r->add('GET', '/api/clientes/ficha-completa', RegistroClienteController::class, 'fichaCompleta');
+    // Spec 2026: avance/gerencia/caja segura (clientes/cartas viven en su módulo)
     // Módulo sucursales traído de CENTECPC — ver backend/Modules/Sucursales/
     (require __DIR__ . '/../Modules/Sucursales/routes.php')($r);
     // RBAC: Usuario → Rol → Permisos → Módulos → Vistas → Acciones (módulo)
     (require __DIR__ . '/../Modules/Rbac/routes.php')($r);
-    // Spec 2026: clasificación/cartas/morosidad/avance/gerencia/caja segura
-    $r->add('GET', '/api/clientes/clasificacion', ClasificacionController::class, 'listar');
-    $r->add('POST', '/api/clientes/sentinel', ClasificacionController::class, 'setSentinel');
-    $r->add('GET', '/api/clientes/morosidad', ClasificacionController::class, 'morosidad');
-    $r->add('GET', '/api/cartas/invitacion', CartaController::class, 'invitacion');
-    $r->add('GET', '/api/cartas/cobranza', CartaController::class, 'cobranza');
-    $r->add('POST', '/api/cartas/registrar', CartaController::class, 'registrar');
-    $r->add('GET', '/api/cartas/historial', CartaController::class, 'historial');
+    // Spec 2026: avance/gerencia/caja segura (clientes/cartas viven en su módulo)
     $r->add('GET', '/api/cobros/avance', AvanceController::class, 'ver');
     $r->add('POST', '/api/cobros/avance/guardar', AvanceController::class, 'guardar');
     $r->add('GET', '/api/cobros/avance/snapshot', AvanceController::class, 'snapshot');

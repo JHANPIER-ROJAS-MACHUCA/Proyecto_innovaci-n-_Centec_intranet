@@ -8,7 +8,7 @@
 //   declaracion_jurada_patrimonial.php
 // - formatos/ (FICHA UNICA DATOS, DOMICILIO Y NEGOCIO 2025, PATRIMONIO, ALOJADO)
 require_once __DIR__ . '/../repositories/EvaluacionRepository.php';
-require_once __DIR__ . '/../repositories/ClienteRegistroRepository.php';
+require_once __DIR__ . '/../Modules/Clientes/Repositories/ClienteRegistroRepository.php';
 
 class DocumentoService
 {

@@ -1,39 +1,7 @@
 <?php
-require_once __DIR__ . '/../services/ClasificacionService.php';
-
-class ClasificacionController
-{
-    public static function listar(AppRequest $req): void
-    {
-        RoleMiddleware::require([8, 5, 1]);
-        try {
-            $cat = strtoupper(trim($req->query['categoria'] ?? 'todas'));
-            $limit = max(1, min(5000, (int) ($req->query['limit'] ?? 500)));
-            Response::json(['data' => ClasificacionService::clasificar($cat === 'TODAS' ? 'todas' : $cat, $limit), 'success' => true]);
-        } catch (DomainException $e) {
-            Response::error($e->getMessage(), 422);
-        }
-    }
-
-    public static function setSentinel(AppRequest $req): void
-    {
-        RoleMiddleware::require([8, 5, 1]);
-        try {
-            ClasificacionService::setSentinel((int) ($req->body['idCG'] ?? 0), (string) ($req->body['sentinel'] ?? ''));
-            Response::json(['success' => true]);
-        } catch (DomainException $e) {
-            Response::error($e->getMessage(), 422);
-        }
-    }
-
-    public static function morosidad(AppRequest $req): void
-    {
-        RoleMiddleware::require([8, 5, 1, 2, 9]);
-        $rows = ClasificacionService::morosidad();
-        foreach ($rows as &$r) $r['tramo'] = ClasificacionService::tramo((int) $r['dias_max']);
-        Response::json(['data' => $rows, 'success' => true]);
-    }
-}
+// Módulo Clientes — controlador de cartas (extraído de ClasificacionController.php,
+// phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/CartaService.php';
 
 class CartaController
 {

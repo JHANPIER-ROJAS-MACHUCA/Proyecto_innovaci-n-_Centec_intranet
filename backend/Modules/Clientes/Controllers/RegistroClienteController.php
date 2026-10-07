@@ -1,7 +1,7 @@
 <?php
-// Registro completo de clientes traído de CENTECPC.
+// Módulo Clientes — registro completo (movido de controllers/, phase2-modular).
 // Origen: app/Modules/Cliente/models/Cliente.php + controllers/ClienteController.php
-require_once __DIR__ . '/../repositories/ClienteRegistroRepository.php';
+require_once __DIR__ . '/../Repositories/ClienteRegistroRepository.php';
 
 class RegistroClienteController
 {

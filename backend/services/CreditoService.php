@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../repositories/CreditoRepository.php';
-require_once __DIR__ . '/../repositories/ClienteRepository.php';
+require_once __DIR__ . '/../Modules/Clientes/Repositories/ClienteRepository.php';
 
 class CreditoService
 {

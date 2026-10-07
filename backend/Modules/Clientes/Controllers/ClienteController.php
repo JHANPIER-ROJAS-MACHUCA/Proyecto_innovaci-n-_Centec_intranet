@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../services/ClienteService.php';
+// Módulo Clientes — controlador (movido de controllers/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/ClienteService.php';
 
 class ClienteController
 {

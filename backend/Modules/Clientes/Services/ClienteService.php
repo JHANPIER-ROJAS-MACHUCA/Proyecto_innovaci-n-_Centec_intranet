@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../repositories/ClienteRepository.php';
-require_once __DIR__ . '/../repositories/CreditoRepository.php';
-require_once __DIR__ . '/../repositories/CatalogoRepository.php';
-require_once __DIR__ . '/../repositories/FinancieraRepository.php';
+require_once __DIR__ . '/../Repositories/ClienteRepository.php';
+require_once __DIR__ . '/../../../repositories/CreditoRepository.php';
+require_once __DIR__ . '/../../../repositories/CatalogoRepository.php';
+require_once __DIR__ . '/../../../repositories/FinancieraRepository.php';
 
 class ClienteService
 {
