@@ -1,0 +1,39 @@
+ 
+   .contents {
+background: rgba(22,102,223,0.29);
+background: -moz-linear-gradient(top, rgba(22,102,223,0.29) 0%, rgba(51,133,255,0.39) 19%, rgba(49,131,253,0.4) 20%, rgba(22,102,223,0.43) 38%, rgba(14,66,143,0.54) 59%, rgba(14,64,139,0.55) 60%, rgba(14,64,139,0.66) 81%, rgba(14,64,139,0.66) 82%, rgba(15,28,138,0.62) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(22,102,223,0.29)), color-stop(19%, rgba(51,133,255,0.39)), color-stop(20%, rgba(49,131,253,0.4)), color-stop(38%, rgba(22,102,223,0.43)), color-stop(59%, rgba(14,66,143,0.54)), color-stop(60%, rgba(14,64,139,0.55)), color-stop(81%, rgba(14,64,139,0.66)), color-stop(82%, rgba(14,64,139,0.66)), color-stop(100%, rgba(15,28,138,0.62)));
+background: -webkit-linear-gradient(top, rgba(22,102,223,0.29) 0%, rgba(51,133,255,0.39) 19%, rgba(49,131,253,0.4) 20%, rgba(22,102,223,0.43) 38%, rgba(14,66,143,0.54) 59%, rgba(14,64,139,0.55) 60%, rgba(14,64,139,0.66) 81%, rgba(14,64,139,0.66) 82%, rgba(15,28,138,0.62) 100%);
+background: -o-linear-gradient(top, rgba(22,102,223,0.29) 0%, rgba(51,133,255,0.39) 19%, rgba(49,131,253,0.4) 20%, rgba(22,102,223,0.43) 38%, rgba(14,66,143,0.54) 59%, rgba(14,64,139,0.55) 60%, rgba(14,64,139,0.66) 81%, rgba(14,64,139,0.66) 82%, rgba(15,28,138,0.62) 100%);
+background: -ms-linear-gradient(top, rgba(22,102,223,0.29) 0%, rgba(51,133,255,0.39) 19%, rgba(49,131,253,0.4) 20%, rgba(22,102,223,0.43) 38%, rgba(14,66,143,0.54) 59%, rgba(14,64,139,0.55) 60%, rgba(14,64,139,0.66) 81%, rgba(14,64,139,0.66) 82%, rgba(15,28,138,0.62) 100%);
+background: linear-gradient(to bottom, rgba(22,102,223,0.29) 0%, rgba(51,133,255,0.39) 19%, rgba(49,131,253,0.4) 20%, rgba(22,102,223,0.43) 38%, rgba(14,66,143,0.54) 59%, rgba(14,64,139,0.55) 60%, rgba(14,64,139,0.66) 81%, rgba(14,64,139,0.66) 82%, rgba(15,28,138,0.62) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1666df', endColorstr='#0f1c8a', GradientType=0 );
+ /* background: yellow;*/
+  /*background-color:#1d3c6a;*/
+  border-radius: 13px 13px 13px 13px;
+-moz-border-radius: 13px 13px 13px 13px;
+-webkit-border-radius: 13px 13px 13px 13px;
+border: 0px solid #3778d4;
+-webkit-box-shadow: 0px 9px 94px 35px rgba(29,60,106,1);
+-moz-box-shadow: 0px 9px 94px 35px rgba(29,60,106,1);
+box-shadow: 0px 9px 94px 35px rgba(29,60,106,1);
+/*
+   opacity:0.5;
+   filter:alpha(opacity=60);*/
+  /*color: rgba(0, 0, 0, .8);*/
+  padding: 60px 6px;
+  margin:3;
+}
+.slide-up, .slide-down {
+  overflow:hidden;
+}
+.slide-up > div, .slide-down > div {
+  transform: translateY(100%);
+  transition: .4s ease-in-out;
+}
+.slide-down > div {            
+  transform: translateY(0);
+} 
+.opacity{
+}
+     

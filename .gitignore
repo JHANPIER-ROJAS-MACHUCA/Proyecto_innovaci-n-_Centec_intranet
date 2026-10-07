@@ -1,0 +1,31 @@
+# Legado (archivo histórico local, 1GB+): no versionar
+anitguo/
+
+# Dependencias reinstalables
+backend/vendor/
+frontend/node_modules/
+
+# Build
+frontend/dist/
+
+# Archivos con datos sensibles / entorno
+backend/.env
+**/.env
+*.sql
+!backend/database/*.sql
+
+# Uploads y archivos de usuarios (se respaldan aparte)
+backend/storage/attachments/
+backend/storage/customers/
+backend/storage/profiles/
+backend/storage/uploads/
+backend/storage/evidencias/
+frontend/public/uploads/
+
+# Logs y temporales
+error_log
+**/error_log
+*.log
+Thumbs.db
+desktop.ini
+.DS_Store
