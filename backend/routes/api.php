@@ -75,8 +75,6 @@ return function (Router $r) {
     $r->add('GET', '/api/cpanel/resumen', CpanelController::class, 'resumen');
     $r->add('GET', '/api/empresa', EmpresaController::class, 'ver');
     $r->add('POST', '/api/empresa/actualizar', EmpresaController::class, 'actualizar');
-    $r->add('GET', '/api/propuestas/detalle', PropuestaController::class, 'detalle');
-    $r->add('POST', '/api/propuestas/crear', PropuestaController::class, 'crear');
     // Módulo Caja (caja/bóveda/billetaje/recibos/extornos) — ver backend/Modules/Caja/
     (require __DIR__ . '/../Modules/Caja/routes.php')($r);
     $r->add('GET', '/api/justificaciones', JustificacionController::class, 'listar');
