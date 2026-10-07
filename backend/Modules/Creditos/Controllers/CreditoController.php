@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../services/CreditoService.php';
-require_once __DIR__ . '/../services/CreditoEstadoService.php';
+// Módulo Creditos — controlador (movido de controllers/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Services/CreditoService.php';
+require_once __DIR__ . '/../Services/CreditoEstadoService.php';
 
 class CreditoController
 {

@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . '/CajaService.php';
-require_once __DIR__ . '/../repositories/FinancieraRepository.php';
+// Módulo Creditos — cobros de cuotas (movido de services/, phase2-modular).
+// Usa Caja (compartida, futuro Modules/Caja) y transacciones (Financiera, compartida).
+require_once __DIR__ . '/../../../services/CajaService.php';
+require_once __DIR__ . '/../../../repositories/FinancieraRepository.php';
 
 class CobroValidationException extends Exception
 {

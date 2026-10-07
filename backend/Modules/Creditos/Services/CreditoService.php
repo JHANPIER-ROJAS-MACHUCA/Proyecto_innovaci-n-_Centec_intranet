@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../repositories/CreditoRepository.php';
-require_once __DIR__ . '/../Modules/Clientes/Repositories/ClienteRepository.php';
+// Módulo Creditos — servicio (movido de services/, phase2-modular; idéntico).
+require_once __DIR__ . '/../Repositories/CreditoRepository.php';
+require_once __DIR__ . '/../../Clientes/Repositories/ClienteRepository.php';
 
 class CreditoService
 {

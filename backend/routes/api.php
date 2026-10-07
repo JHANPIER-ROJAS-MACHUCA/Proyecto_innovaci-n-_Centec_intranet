@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UsuarioController.php';
-require_once __DIR__ . '/../controllers/CreditoController.php';
-require_once __DIR__ . '/../controllers/CobroController.php';
 require_once __DIR__ . '/../controllers/CajaController.php';
 require_once __DIR__ . '/../controllers/CatalogoController.php';
 require_once __DIR__ . '/../controllers/CampoController.php';
@@ -19,6 +17,8 @@ require_once __DIR__ . '/../Modules/Clientes/Controllers/ClienteController.php';
 require_once __DIR__ . '/../Modules/Clientes/Controllers/RegistroClienteController.php';
 require_once __DIR__ . '/../Modules/Clientes/Controllers/ClasificacionController.php';
 require_once __DIR__ . '/../Modules/Clientes/Controllers/CartaController.php';
+require_once __DIR__ . '/../Modules/Creditos/Controllers/CreditoController.php';
+require_once __DIR__ . '/../Modules/Creditos/Controllers/CobroController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
 
@@ -37,20 +37,8 @@ return function (Router $r) {
     $r->add('POST', '/api/usuarios', UsuarioController::class, 'create');
     // Módulo Clientes — ver backend/Modules/Clientes/
     (require __DIR__ . '/../Modules/Clientes/routes.php')($r);
-    $r->add('POST', '/api/creditos/generar', CreditoController::class, 'generar');
-    $r->add('GET', '/api/creditos/por-cliente', CreditoController::class, 'byCustomer');
-    $r->add('GET', '/api/creditos/detalle', CreditoController::class, 'detalle');
-    $r->add('POST', '/api/creditos/confirmar', CreditoController::class, 'confirmar');
-    $r->add('POST', '/api/creditos/activar', CreditoController::class, 'activar');
-    $r->add('POST', '/api/creditos/desembolsar', CreditoController::class, 'desembolsar');
-    $r->add('POST', '/api/creditos/cancelar', CreditoController::class, 'cancelar');
-    $r->add('GET', '/api/creditos/tipos', CreditoController::class, 'tipos');
-    $r->add('POST', '/api/creditos/editar', CreditoController::class, 'editar');
-    $r->add('GET', '/api/creditos', CreditoController::class, 'porEstado');
-    $r->add('POST', '/api/cobros', CobroController::class, 'cobrar');
-    $r->add('POST', '/api/cobros/simular', CobroController::class, 'simular');
-    $r->add('POST', '/api/cobros/condonar', CobroController::class, 'condonar');
-    $r->add('POST', '/api/cobros/eliminar', CobroController::class, 'eliminarTransaccion');
+    // Módulo Créditos (cobros incluidos) — ver backend/Modules/Creditos/
+    (require __DIR__ . '/../Modules/Creditos/routes.php')($r);
     $r->add('POST', '/api/ahorros/anular', AhorroController::class, 'anular');
     $r->add('POST', '/api/ahorros', AhorroController::class, 'registrar');
     $r->add('POST', '/api/metas/eliminar', MetaController::class, 'eliminar');
