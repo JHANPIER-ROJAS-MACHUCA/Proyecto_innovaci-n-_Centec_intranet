@@ -21,6 +21,7 @@ require_once __DIR__ . '/../Modules/Creditos/Controllers/CreditoController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/CobroController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/MoraController.php';
 require_once __DIR__ . '/../Modules/Creditos/Controllers/MantenimientoController.php';
+require_once __DIR__ . '/../Modules/Propuestas/Controllers/PropuestaController.php';
 require_once __DIR__ . '/../Modules/Ahorros/Controllers/AhorroController.php';
 require_once __DIR__ . '/../services/AvanceService.php';
 require_once __DIR__ . '/../services/GerenciaService.php';
@@ -52,9 +53,8 @@ return function (Router $r) {
     $r->add('POST', '/api/relaciones/eliminar', RelacionController::class, 'delete');
     $r->add('POST', '/api/relaciones', RelacionController::class, 'add');
     $r->add('GET', '/api/oficinas', OficinaController::class, 'list');
-    $r->add('GET', '/api/propuestas/detalle', PropuestaController::class, 'detalle');
-    $r->add('GET', '/api/propuestas', PropuestaController::class, 'list');
-    $r->add('POST', '/api/propuestas/responder', PropuestaController::class, 'responder');
+    // Módulo Propuestas — ver backend/Modules/Propuestas/
+    (require __DIR__ . '/../Modules/Propuestas/routes.php')($r);
     $r->add('POST', '/api/cobros/simular', CobroController::class, 'simular');
     $r->add('GET', '/api/adjuntos', AdjuntoController::class, 'listar');
     $r->add('POST', '/api/usuarios/avatar', UsuarioController::class, 'avatar');
@@ -62,8 +62,6 @@ return function (Router $r) {
     $r->add('POST', '/api/usuarios/mi-perfil', UsuarioController::class, 'miPerfil');
     $r->add('POST', '/api/usuarios/cambiar-clave', UsuarioController::class, 'cambiarClave');
     $r->add('GET', '/api/metas/por-usuario', MetaController::class, 'porUsuario');
-    $r->add('POST', '/api/propuestas/eliminar', PropuestaController::class, 'eliminar');
-    $r->add('POST', '/api/propuestas/evaluar', PropuestaController::class, 'evaluar');
     $r->add('POST', '/api/caja/cerrar', CajaController::class, 'cerrar');
     $r->add('GET', '/api/boveda/saldos', BovedaController::class, 'saldos');
     $r->add('POST', '/api/boveda/consumir', BovedaController::class, 'consumir');
